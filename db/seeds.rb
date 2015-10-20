@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+5.times do |i|
+  Cat.create!(name: "Sennacy#{i+1}", color: "black",
+              birth_date: Time.parse("01/#{i+1}/2014"),
+              description: "Best cat ever", sex: "M")
+end

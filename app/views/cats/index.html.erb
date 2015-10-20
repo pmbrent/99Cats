@@ -1,0 +1,5 @@
+<h1>All the Cats!</h1>
+
+<% @cats.each do |cat| %>
+<h3><%= link_to cat.name, cat_url(cat) %></a></h3>
+<% end %>
