@@ -3,3 +3,7 @@
 <% @cats.each do |cat| %>
 <h3><%= link_to cat.name, cat_url(cat) %></a></h3>
 <% end %>
+
+<%= link_to "New Cat", new_cat_url %>
+<br>
+<%= link_to "New Cat Rental Request", new_cat_rental_request_url %>

@@ -6,7 +6,6 @@ class CatRentalRequestsController < ApplicationController
 
   def create
     @rental = CatRentalRequest.new(rental_params)
-
     if @rental.save
       redirect_to cat_rental_request_url(@rental)
     else
@@ -16,6 +15,18 @@ class CatRentalRequestsController < ApplicationController
 
   def show
     @rental = CatRentalRequest.find(params[:id])
+  end
+
+  def approve!
+    @rental = CatRentalRequest.find(params[:id])
+    @rental.approve!
+    redirect_to cat_url(@rental.cat)
+  end
+
+  def deny!
+    @rental = CatRentalRequest.find(params[:id])
+    @rental.deny!
+    redirect_to cat_url(@rental.cat)
   end
 
 private

@@ -39,6 +39,7 @@
     <tr>
       <td>Start Date</td>
       <td>End Date</td>
+
     </tr>
 
   <% @cat.cat_rental_requests.order(:start_date).each do |rental| %>
@@ -46,9 +47,14 @@
     <tr>
       <td><%= rental.start_date %></td>
       <td><%= rental.end_date %></td>
+      <%if rental.status == "PENDING"%>
+      <td><%= button_to "Approve", approve_rental_url, method: :post %></td>
+      <td><%= button_to "Deny", deny_rental_url, method: :post %></td>
+      <%end%>
     </tr>
 
   <% end %>
-  
+
+
   </tbody>
 </table>
