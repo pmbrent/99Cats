@@ -2,7 +2,6 @@ class CatsController < ApplicationController
 
   def index
     @cats = Cat.all
-    render :index
   end
 
   def show
@@ -11,7 +10,6 @@ class CatsController < ApplicationController
 
   def new
     @cat = Cat.new
-    render :new
   end
 
   def create
@@ -32,14 +30,14 @@ class CatsController < ApplicationController
     if @cat.update(cat_params)
       redirect_to cat_url(@cat)
     else
-      redirect_to edit_cat_url(@cat)
+      render :edit
     end
   end
 
 private
 
   def cat_params
-      params.require(:cat).permit(:birth_date, :color, :name, :sex, :description)
+    params.require(:cat).permit(:birth_date, :color, :name, :sex, :description)
   end
 
 end

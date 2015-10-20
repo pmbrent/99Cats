@@ -1,7 +1,12 @@
-<% cat = @cat %>
-<% action_url = cat.persisted? ? cat_url(cat) : cats_url %>
-<% form_method = cat.persisted? ? "PATCH" : "POST" %>
-<% submit_text = cat.persisted? ? "Update cat!" : "Create cat!" %>
+<%if cat.persisted?%>
+  <%action_url = cats_url(cat)%>
+  <%form_method = "PATCH"%>
+  <%submit_text = "Update Cat!"%>
+<%else%>
+  <%action_url = cats_url%>
+  <%form_method = "POST"%>
+  <%submit_text = "Create Cat!"%>
+<%end%>
 
 
 <form action=<%=action_url%> method="POST">

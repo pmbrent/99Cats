@@ -1,7 +1,7 @@
 class CatRentalRequestsController < ApplicationController
 
   def new
-      @rental = CatRentalRequest.new
+    @rental = CatRentalRequest.new
   end
 
   def create

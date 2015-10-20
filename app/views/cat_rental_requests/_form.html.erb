@@ -1,8 +1,12 @@
-<% rental = @rental %>
-<% action_url = rental.persisted? ? cat_rental_requests_url(rental) :
-                                    cat_rental_requests_url %>
-<% form_method = rental.persisted? ? "PATCH" : "POST" %>
-<% submit_text = rental.persisted? ? "Update Request!" : "Create Request!" %>
+<%if rental.persisted?%>
+  <%action_url = cat_rental_requests_url(rental)%>
+  <%form_method = "PATCH"%>
+  <%submit_text = "Update Request!"%>
+<%else%>
+  <%action_url = cat_rental_requests_url%>
+  <%form_method = "POST"%>
+  <%submit_text = "Create Request!"%>
+<%end%>
 
 
 <form action=<%=action_url%> method="POST">

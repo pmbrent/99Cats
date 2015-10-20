@@ -1,9 +1,9 @@
 class Cat < ActiveRecord::Base
-  COLORS = ["white","black","orange","gray"]
+  COLORS = %w(black white gray orange)
 
   validates :birth_date, :color, :name, :sex, :description, presence: true
   validates :color, inclusion: { in: COLORS }
-  validates :sex, inclusion: { in: ["M", "F"] }
+  validates :sex, inclusion: { in: %w(M F) }
 
   has_many :cat_rental_requests, :dependent => :destroy
 
