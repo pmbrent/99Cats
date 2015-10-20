@@ -1,0 +1,37 @@
+<% rental = @rental %>
+<% action_url = rental.persisted? ? cat_rental_requests_url(rental) :
+                                    cat_rental_requests_url %>
+<% form_method = rental.persisted? ? "PATCH" : "POST" %>
+<% submit_text = rental.persisted? ? "Update Request!" : "Create Request!" %>
+
+
+<form action=<%=action_url%> method="POST">
+<input type="hidden" name="_method" value=<%=form_method%>>
+
+<label for="rental_cat_id">Cat Requested: </label>
+<select name="cat_rental_request[cat_id]" id="rental_cat_id">
+  <% Cat.all.each do |cat| %>
+  <option selected=<%= rental.cat_id == cat.id %>
+    value=<%= cat.id %>> <%= cat.name %></option>
+  <% end %>
+</select>
+<br>
+<br>
+
+<label for="rental_start_date">Start Date</label>
+<input type="date" name="cat_rental_request[start_date]"
+        id="rental_start_date"
+        value= <%= rental.start_date %> >
+<br>
+<br>
+
+<label for="rental_end_date">End Date</label>
+<input type="date" name="cat_rental_request[end_date]"
+        id="rental_end_date"
+        value= <%= rental.end_date %> >
+<br>
+<br>
+
+<input type='submit' value=<%= submit_text %>>
+
+</form>
