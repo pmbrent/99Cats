@@ -5,6 +5,23 @@ class CatRentalRequest < ActiveRecord::Base
 
   belongs_to :cat
 
+  def approve!
+    if status == "PENDING"
+      status = "APPROVED"
+      CatRentalRequest.transaction do
+        self.save!
+        overlapping_pending_requests.each do |request|
+          request.deny!
+        end
+      end
+    end
+  end
+
+  def deny!
+    status = "DENIED"
+    self.save!
+  end
+
 private
 
   def non_conflicting_scheduling
