@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :cats
   resources :cat_rental_requests
+  resources :users, only: [:new, :create]
+  resource  :session, only: [:new, :create, :destroy]
 
   post '/cat_rental_requests/:id/approve' => 'cat_rental_requests#approve!',
         as: "approve_rental"
