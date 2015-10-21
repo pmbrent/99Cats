@@ -5,8 +5,13 @@ class Cat < ActiveRecord::Base
   validates :color, inclusion: { in: COLORS }
   validates :sex, inclusion: { in: %w(M F) }
 
-  has_many :cat_rental_requests, :dependent => :destroy
+  has_many :cat_rental_requests, dependent: :destroy
 
+  belongs_to(
+    :owner,
+    class_name: "User",
+    foreign_key: :user_id
+  )
 
   def age
     ((Date.today - birth_date) / 365).to_i

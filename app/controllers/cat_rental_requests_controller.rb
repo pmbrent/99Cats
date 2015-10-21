@@ -1,5 +1,8 @@
 class CatRentalRequestsController < ApplicationController
 
+  before_action :not_signed_in, except: [:index, :show]
+  before_action :confirm_ownership, only: [:approve!, :deny!]
+
   def new
     @rental = CatRentalRequest.new
   end
@@ -33,6 +36,14 @@ private
 
   def rental_params
     params.require(:cat_rental_request).permit(:cat_id, :start_date, :end_date)
+  end
+
+  def confirm_ownership
+    current_user.cats.find(params[:cat_id])
+
+    rescue
+      set_flash("This is not your cat.")
+      redirect_to cat_url(params[:cat_id])
   end
 
 end

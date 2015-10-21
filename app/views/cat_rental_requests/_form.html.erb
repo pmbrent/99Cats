@@ -10,7 +10,13 @@
 
 
 <form action=<%=action_url%> method="POST">
-<input type="hidden" name="_method" value=<%=form_method%>>
+<input type="hidden"
+       name="_method"
+       value=<%=form_method%>>
+
+<input type="hidden"
+       name="authenticity_token"
+       value="<%= form_authenticity_token %>">
 
 <label for="rental_cat_id">Cat Requested: </label>
 <select name="cat_rental_request[cat_id]" id="rental_cat_id">

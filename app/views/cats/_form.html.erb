@@ -9,8 +9,15 @@
 <%end%>
 
 
-<form action=<%=action_url%> method="POST">
-<input type="hidden" name="_method" value=<%=form_method%>>
+<form action="<%= action_url %>" method="POST">
+
+<input type="hidden"
+       name="_method"
+       value="<%= form_method %>">
+
+<input type="hidden"
+       name="authenticity_token"
+       value="<%= form_authenticity_token %>">
 
 <label for="cat_name">Name: </label>
 <input type="text" id="cat_name" name="cat[name]" value= <%= cat.name %>>
@@ -19,33 +26,33 @@
 
 <label>Sex: </label>
 <input type="radio" name="cat[sex]" id="cat_sex_female" value="F"
-  checked = <%= cat.sex == "F" %> >
+  checked = "<%= cat.sex == "F" %>" >
 <label for="cat_sex_female">Female</label>
 
 <input type="radio" name="cat[sex]" id="cat_sex_male" value="M"
-  checked = <%= cat.sex == "M" %> >
+  checked = "<%= cat.sex == "M" %>" >
 <label for="cat_sex_male">Male</label>
 <br>
 <br>
 
 <label for="cat_birth_date">Cat Birth Date</label>
 <input type="date" name="cat[birth_date]" id="cat_birth_date"
-        value= <%= cat.birth_date %> >
+        value= "<%= cat.birth_date %>" >
 <br>
 <br>
 
 <label for="cat_color">Color: </label>
 <select name="cat[color]" id="cat_color">
-  <option selected=<%= cat.color == "white" %> value="white">White</option>
-  <option selected=<%= cat.color == "black" %> value="black">Black</option>
-  <option selected=<%= cat.color == "orange" %> value="option">Orange</option>
-  <option selected=<%= cat.color == "gray" %> value="gray">Gray</option>
+  <option selected="<%= cat.color == "white" %>" value="white">White</option>
+  <option selected="<%= cat.color == "black" %>" value="black">Black</option>
+  <option selected="<%= cat.color == "orange" %>" value="option">Orange</option>
+  <option selected="<%= cat.color == "gray" %>" value="gray">Gray</option>
 </select>
 <br>
 <br>
 
 <label for="cat_description">Cat Biography:</label>
-<textarea name="cat[description]" id="cat_description" value=cat.description>
+<textarea name="cat[description]" id="cat_description" value="cat.description">
 <%= cat.description %></textarea>
 <br>
 

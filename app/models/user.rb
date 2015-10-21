@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :cats, dependent: :destroy
+
+  has_many :cat_rental_requests, through: :cats
+
   def self.find_by_credentials(user_name, password)
     user = User.find_by_user_name(user_name)
     return unless user

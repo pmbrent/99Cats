@@ -5,6 +5,8 @@ class CatRentalRequest < ActiveRecord::Base
 
   belongs_to :cat
 
+  has_one :owner, through: :cat
+
   def approve!
     if status == "PENDING"
       self.status = "APPROVED"

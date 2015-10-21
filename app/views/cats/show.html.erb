@@ -9,6 +9,10 @@
   </thead>
   <tbody>
     <tr>
+      <td>Owner </td>
+      <td><%= @cat.owner.user_name %></td>
+    </tr>
+    <tr>
       <td>Birth Date: </td>
       <td><%= @cat.birth_date %></td>
     </tr>
@@ -48,8 +52,12 @@
       <td><%= rental.start_date %></td>
       <td><%= rental.end_date %></td>
       <%if rental.status == "PENDING"%>
-      <td><%= button_to "Approve", approve_rental_url, method: :post %></td>
-      <td><%= button_to "Deny", deny_rental_url, method: :post %></td>
+      <td><%= button_to "Approve",
+        {controller: "cat_rental_requests", action: "approve!", cat_id: @cat.id},
+        method: :post %></td>
+      <td><%= button_to "Deny",
+        {controller: "cat_rental_requests", action: "deny!", cat_id: @cat.id},
+        method: :post %></td>
       <%end%>
     </tr>
 
