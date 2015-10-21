@@ -15,6 +15,9 @@
 end
 
 5.times do |i|
-  CatRentalRequest.create!(cat_id: 5-i, start_date: (Date.today - 30 * i),
-                           end_date: (Date.today + 5 * i), user_id: i+1)
+  nums = (1..5).to_a - [i+1]
+  nums.each do |num|
+    CatRentalRequest.create!(cat_id: num, start_date: (Date.today - 30 * i),
+                            end_date: (Date.today + 5 * i), user_id: i+1)
+  end
 end

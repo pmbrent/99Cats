@@ -46,7 +46,7 @@
       <td>Requester Name</td>
     </tr>
 
-  <% @cat.cat_rental_requests.order(:start_date).each do |rental| %>
+  <% @cat.cat_rental_requests.includes(:user).order(:start_date).each do |rental| %>
 
     <tr>
       <td><%= rental.start_date %></td>
