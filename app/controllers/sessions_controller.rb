@@ -1,19 +1,26 @@
 class SessionsController < ApplicationController
 
-  def new
+  before_action :already_signed_in, only: [:new, :create]
 
+  def new
+    @user = User.new
   end
 
   def create
     @user = User.find_by_credentials(params[:user][:user_name],
                                      params[:user][:password])
     if @user
-      @user.reset_session_token!
-      session[:session_token] = @user.session_token
-      redirect_to casts_url
+      sign_in!(@user)
+      redirect_to cats_url
+    else
+      flash[:message] ||= []
+      flash[:message] << "Unknown user name or password"
+      redirect_to new_session_url
     end
   end
 
   def destroy
+    sign_out!(current_user)
+    redirect_to new_session_url
   end
 end

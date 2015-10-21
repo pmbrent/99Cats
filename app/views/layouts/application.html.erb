@@ -5,7 +5,26 @@
   <!-- <%= csrf_meta_tags %> -->
 </head>
 <body>
+  <% flash[:message] && flash[:message].each do |message| %>
+    <%= p message %>
+    <br>
+  <% end %>
 
+<% if current_user %>
+  Welcome, <%= current_user.user_name %>!
+  <form action="<%= session_url %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Sign out">
+  </form>
+<% else %>
+  Welcome!
+  <form action="<%= new_session_url %>" method="GET">
+    <input type="submit" value="Sign in">
+  </form>
+  <form action="<%= new_user_url %>" method="GET">
+    <input type="submit" value="Sign up">
+  </form>
+<% end %>
 <%= yield %>
 
 </body>

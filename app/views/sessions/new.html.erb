@@ -1,7 +1,7 @@
 <% user = @user %>
-<h1>Sign Up</h1>
+<h1>Sign In</h1>
 
-<form action="<%= users_url %>" method="POST">
+<form action="<%= session_url %>" method="POST">
   <label for="user_name">User name</label>
   <input type="text"
          id="user_name"

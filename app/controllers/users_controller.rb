@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_action :already_signed_in, only: [:new, :create]
+
   def show
 
   end
@@ -11,6 +13,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      sign_in!(@user)
       redirect_to cats_url
     else
       render :new
@@ -22,4 +25,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:user_name, :password)
   end
+
 end
