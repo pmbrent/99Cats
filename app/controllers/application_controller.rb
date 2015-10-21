@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def current_user
+    return if session[:session_token].nil?
     User.find_by_session_token(session[:session_token])
   end
 
@@ -13,20 +14,23 @@ class ApplicationController < ActionController::Base
     session[:session_token] = user.session_token
   end
 
+  def signed_in?
+    !!current_user
+  end
+
   def sign_out!(user)
-    current_user.reset_session_token! if current_user
+    current_user.reset_session_token! if signed_in?
     session[:session_token] = nil
   end
 
   def already_signed_in
-    redirect_to cats_url if current_user
+    redirect_to cats_url if signed_in?
   end
 
   def not_signed_in
-    unless current_user
+    unless signed_in?
       redirect_to root_url
-      flash[:message] ||= []
-      flash[:message] << "Please sign up or sign in."
+      set_flash("Please sign up or sign in.")
     end
   end
 

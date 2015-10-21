@@ -13,8 +13,7 @@ class SessionsController < ApplicationController
       sign_in!(@user)
       redirect_to cats_url
     else
-      flash[:message] ||= []
-      flash[:message] << "Unknown user name or password"
+      set_flash("Unknown user name or password")
       redirect_to new_session_url
     end
   end
