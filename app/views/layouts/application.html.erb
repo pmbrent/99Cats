@@ -13,7 +13,7 @@
 
 <% if signed_in? %>
   Welcome, <%= current_user.user_name %>!
-  <form action="<%= session_url %>" method="POST">
+  <form action="<%= destroy_session_url %>" method="POST">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden"
            name="authenticity_token"
