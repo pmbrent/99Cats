@@ -1,9 +1,10 @@
 class CatRentalRequest < ActiveRecord::Base
-  validates :cat_id, :start_date, :end_date, :status, presence: true
+  validates :cat_id, :user_id, :start_date, :end_date, :status, presence: true
   validates :status, inclusion: { in: %w(PENDING APPROVED DENIED) }
   validate  :scheduling
 
   belongs_to :cat
+  belongs_to :user
 
   has_one :owner, through: :cat
 

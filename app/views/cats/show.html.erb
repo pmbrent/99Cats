@@ -43,7 +43,7 @@
     <tr>
       <td>Start Date</td>
       <td>End Date</td>
-
+      <td>Requester Name</td>
     </tr>
 
   <% @cat.cat_rental_requests.order(:start_date).each do |rental| %>
@@ -51,7 +51,8 @@
     <tr>
       <td><%= rental.start_date %></td>
       <td><%= rental.end_date %></td>
-      <%if rental.status == "PENDING"%>
+      <td><%= rental.user.user_name %></td>
+      <%if rental.status == "PENDING" && @cat.owner == current_user%>
       <td><%= button_to "Approve",
         {controller: "cat_rental_requests", action: "approve!", cat_id: @cat.id},
         method: :post %></td>

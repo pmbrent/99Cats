@@ -12,7 +12,9 @@
   Cat.create!(name: "Sennacy#{i+1}", color: "black",
               birth_date: Time.parse("01/#{i+1}/2014"),
               description: "Best cat ever", sex: "M", user_id: i+1)
-  CatRentalRequest.create!(cat_id: 5-i, start_date: (Date.today - 30 * i),
-                           end_date: (Date.today + 5 * i) )
+end
 
+5.times do |i|
+  CatRentalRequest.create!(cat_id: 5-i, start_date: (Date.today - 30 * i),
+                           end_date: (Date.today + 5 * i), user_id: i+1)
 end

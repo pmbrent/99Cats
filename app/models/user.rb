@@ -7,7 +7,15 @@ class User < ActiveRecord::Base
 
   has_many :cats, dependent: :destroy
 
-  has_many :cat_rental_requests, through: :cats
+  has_many(
+    :owned_cat_rental_requests,
+    through: :cats,
+    source: :cat_rental_requests
+  )
+
+  has_many(
+    :cat_rental_requests
+  )
 
   def self.find_by_credentials(user_name, password)
     user = User.find_by_user_name(user_name)
